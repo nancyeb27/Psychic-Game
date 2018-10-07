@@ -1,76 +1,59 @@
 // ESTABLISH var for user and computer 
 
 var computerChoices = ["a","b","c","d","n","q","x","y","z"]
-var letters = ['-','-','-','-','-','-','-','-','-',]
+var letters = []
 var wins = 0;
 var losses = 0;
 var guessesLeft = 9;
 var lettersGuessed = "";
-var computerGuess = "";
-var userGuess = "";
-
-      // TRACK letters/keys pressed(keypress)
+var computerGuess = computerChoices[Math.floor(Math.random(Math.floor) * computerChoices
+      .length)];
       
+   
 document.onkeyup = function (event) {
-       userGuess = event.key;
-       computerGuess = computerChoices[Math.floor(Math.random( Math.floor) * computerChoices
-            .length)];
-            console.log( "userguess",event.key);
-            console.log("computerGuess",computerGuess);
-      
-            // CREATE counter
+      var userGuess = event.key.toLowerCase();
+      letters.push(userGuess);
+             console.log( "userguess",event.key);
+             console.log("computerGuess",computerGuess);
 
-      if ((userGuess === computerGuess) && (guessesLeft > 0)) {                  
-            wins++; 
+          
+      if (userGuess === computerGuess) {                  
+            wins++;
+            letters = [];
+            guessesLeft = 9;
+            computerGuess = computerChoices[Math.floor(Math.random(Math.floor) * computerChoices
+                  .length)];
+            document.getElementById('wins').innerHTML = wins;  
+            alert("You WIN! Let's play again,you have 9 guesses!")
+            
+            console.log(guessesLeft);
+      }      
+                
+  
+      else if ((userGuess !== computerGuess) && (guessesLeft > 0)) {
+               
+            alert ("Sorry, the computer picked a differant letter, please try again.")
             guessesLeft--;
-            
-      // CREATE array ofthe specific letters that the user typed. 
-
-      //  letters = lettersGuessed + userguess;
-       guessedLetters.push(letters);
-             letters = [];
-            console.log(letters);
-
-      // function Letters() {
-      // for (var i = 0; i < userChoices.length; i++); 
-      //       userChoices[i] = letters;
-      //             alert("Letters Guessed", letters ); 
-      //             console.log(letters);
-      //             alert ("Wins: " + wins);  
-      //             alert ("You Win!");
-      
-             // increment total guesses, have a limit of total guesses
-            //  RESEARCH for loop
-            //  RESET code 
-            
-  }
-    else if ((userGuess !== computerGuess) && (guessesLeft > 0)) {
-            losses++; 
-            
-               alert ("Sorry, the computer picked a differant letter, please try again.")
-               guessesLeft--;
+            document.getElementById("guessLeft").innerHTML = guessesLeft;
+            document.getElementById("letters").innerHTML = letters;
                console.log("guesses left",guessesLeft);
-    }               
-            if (guessesLeft > 0) {
-                  alert('You have ' + guessesLeft + ' guesses left.');
+}               
+      else if (guessesLeft === 0) {
+            losses++;
+            letters = [];
+            guessesLeft = 9;
+            computerGuess = computerChoices[Math.floor(Math.random(Math.floor) * computerChoices
+                  .length)];
+            document.getElementById("losses").innerHTML = losses;
+            alert("Game Over");
+            alert("Pick a new letter to try again, you have 9 new guesses");
+             console.log(losses)
+	
+}          
     }
-                  else if (guessesLeft === 0) {
-                        alert("Game Over");
-                        document.location.reload();
-                        alert("Try again, you have guesses!")
-                        
-      }
 
+          
 
-            // Display data on browser page
-
-            
-      function display() {
-            wins.innerHTML = wins;
-            loses.innerHTML = loses;
-            guessLeft.innerHTML = guessesLeft;
-            letterGuessed.innerHTML = guessedLetters.join(',');
-          }
           
 
 
@@ -78,7 +61,7 @@ document.onkeyup = function (event) {
 
 
 
-}
+// if (guessesLeft === 0)
 
             
             
