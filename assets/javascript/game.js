@@ -39,13 +39,13 @@ document.onkeyup = function (event) {
                console.log("guesses left",guessesLeft);
 }               
       else if (guessesLeft === 0) {
-            losses++;
+            losses ++;
+            alert("Game Over");
             letters = [];
             guessesLeft = 9;
             computerGuess = computerChoices[Math.floor(Math.random(Math.floor) * computerChoices
                   .length)];
             document.getElementById("losses").innerHTML = losses;
-            alert("Game Over");
             alert("Pick a new letter to try again, you have 9 new guesses");
              console.log(losses)
 	
